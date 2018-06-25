@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrations</title>
+    <link rel="shortcut icon" href="ic.png" type="image/x-icon">
+    <style>
+        body{
+            background-image: url('pattern1.png');
+            
+        }
+        h2{
+            color:white;
+            text-shadow: -2px 2px 2px red, 2px 2px 2px blue,-2px -2px 2px green;
+            text-align: center;
+        }
+        .data-container{
+            font-family:'Courier New', Courier, monospace;
+            color:purple;
+            text-align: center;
+            margin-top:5%;
+            margin-bottom:5%;
+            margin-left:50%;
+            transform: translateX(-50%);
+            width: 60%;
+            background: white;
+            padding:20px;
+            box-shadow: -5px 5px 12px black;
+            overflow: auto;
+            box-shadow: -0px 0px 12px 10px grey;
+        }
+        th,td{
+            text-align: center;
+            width:15%;
+            padding:20px;
+        }
+        td{
+            color:black;
+        }
+    </style>
+    <script>
+        function loadData(){
+            var obj = JSON.parse(localStorage.getItem("entries")) || {};
+            table = document.getElementById('tdata');            
+            body=document.createElement("TBODY");
+            console.log(obj)
+            if(Object.keys(obj).length === 0 && obj.constructor === Object)
+            {
+                document.getElementById("tdata").style.visibility = "hidden"; 
+                text = document.createTextNode("No Registrations Yet");
+                cnt = document.getElementById('container');
+                cnt.appendChild(text);
+                return;
+            }
+            for (var i in obj) {
+               row = document.createElement('TR');
+               for(var j in obj[i] ){
+                   data = document.createElement('TD');
+                   text = document.createTextNode(obj[i][j]);
+                   data.appendChild(text);
+                   row.appendChild(data); 
+               }
+               body.appendChild(row);
+            }
+            table.appendChild(body);
+        }
+    </script>
+</head>
+<body onload="loadData()">
+    <div id="container" class="data-container">
+        <h2>Registrations</h2>
+        <table id="tdata">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Date Of Birth</th>
+                    <th>E-mail</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>

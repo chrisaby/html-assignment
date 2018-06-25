@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gaming Registration</title>
+    <link rel="shortcut icon" href="ic.png" type="image/x-icon">
+    <style>
+        body{
+            
+            background-image: url('pattern1.png');
+        }
+        h2{
+            color:white;
+            text-shadow: -2px 2px 2px red, 2px 2px 2px blue,-2px -2px 2px green;
+            font-family:'Courier New', Courier, monospace;
+            text-align: center;
+
+        }
+        .form-container{
+            color:tomato;
+            margin-top:10%;
+            font-family:'Courier New', Courier, monospace;
+            margin-left:50%;
+            transform: translateX(-50%);
+            width: 500px;
+            background: white;
+            padding:20px;
+            box-shadow: -0px 0px 12px 10px grey;
+            overflow: auto;
+         }
+         
+         .frm-item{
+            padding:10px;
+            
+         }
+         .frm-item  input{
+            float: right;
+            width:40%;
+         }
+         .submit{
+             margin:10px;
+             padding:10px;
+             text-align: center;
+         }
+         .submit input{
+               border:none;
+               padding:15px;
+               font-family:'Courier New', Courier, monospace;
+               border-radius:25px;
+               background:white;
+               box-shadow: 0px 0px 15px 5px yellowgreen; 
+               transition: 0.1s;
+
+         }
+         .submit input:hover{
+               border:none;
+               padding:15px 20px 15px 20px;
+               font-weight: bold;
+               font-family:'Courier New', Courier, monospace;
+               border-radius:25px;
+               background:white;
+               box-shadow: 0px 0px 20px 10px purple; 
+               transition: 0.1s;
+         }
+    </style>
+    <script>
+        function register(){
+            if(document.getElementById("uname").value == "" ||
+            document.getElementById("city").value == "" ||
+            document.getElementById("dob").value == "" ||
+            document.getElementById("email").value == "" ||
+            document.getElementById("phone").value == ""
+
+
+            ){
+                alert("Please Fill All Fields");
+                return;
+            }
+            var obj = JSON.parse(localStorage.getItem("entries")) || {};
+            obj[document.getElementById("email").value] = {
+                "uname" : document.getElementById("uname").value,
+                "city"  : document.getElementById("city").value,
+                "dob"   : document.getElementById("dob").value,
+                "email" : document.getElementById("email").value,
+                "phone" : document.getElementById("phone").value
+            };
+            localStorage.setItem("entries",JSON.stringify(obj));
+            alert(" Registration Success! " );
+            window.location.href = "output.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container" >
+        <h2>Registration Form</h2>
+        <form onsubmit="register()">
+
+            <div class="frm-item">
+                <label for="uname">User Name : </label>
+                <input id="uname" type="text"  >
+            </div>
+            <div class="frm-item">
+
+                <label for="city">City : </label>
+                <input id="city" list="cities">
+
+                <datalist id="cities">
+                        <option value="Ahmedabad">
+                        <option value="Bangalore">
+                        <option value="Chennai">
+                        <option value="Calicut">
+                        <option value="Delhi">                    
+                        <option value="Hyderabad">
+                        <option value="Kochi">
+                        <option value="Mumbai">
+                        <option value="Trivandrum">
+                </datalist>
+            </div>
+            <div class="frm-item">
+
+                <label for="dob">Date Of Birth : </label>
+                <input id="dob" type="date">
+            </div>
+            <div class="frm-item">
+
+                <label for="email">E-mail : </label>
+                <input id="email" type="email" >
+            </div>
+            <div class="frm-item">
+
+                <label for="phone">Phone : </label>
+                <input id="phone" type="tel" >
+            </div>
+            <div class="submit">
+                <input type="submit" value="Register" onClick="register()" >   
+            </div>
+        </form>
+    </div>
+</body>
+</html>
